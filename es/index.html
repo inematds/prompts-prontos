@@ -5,7 +5,7 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Prompts listos · INEMA.CLUB</title>
-<meta content="13 system prompts completos, creados a partir de las técnicas del Manual Oculto de la IA — copia, cambia los campos, pégalos." name="description"/>
+<meta content="16 prompts listos: 13 system prompts creados a partir de las técnicas del Manual Oculto de la IA y 3 entrevistas que eligen por ti: copia, cambia los campos y pega." name="description"/>
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -104,7 +104,7 @@
 <div class="max-w-6xl mx-auto px-4 sm:px-6 py-14 sm:py-20 grid lg:grid-cols-2 gap-10 lg:gap-12 items-center">
 <div>
 <p class="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-primary mb-4">
-<span class="w-6 h-px bg-primary"></span> Biblioteca · 13 prompts
+<span class="w-6 h-px bg-primary"></span> Biblioteca · 16 prompts
         </p>
 <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
           Prompts <span class="text-yellow-400">Listos</span>
@@ -112,7 +112,7 @@
 <p class="mt-5 text-lg text-neutral-300 max-w-xl">
           13 system prompts completos, creados a partir de las técnicas del
           <a class="text-sky-400 hover:underline" href="https://inematds.github.io/manual-oculto-ia/" rel="noopener" target="_blank">Manual Oculto de la IA</a>
-          — copia, cambia los <code class="text-primary font-mono">{campos}</code>, pégalo.
+          — copia, cambia los <code class="text-primary font-mono">{campos}</code>, pega. Y 3 entrevistas que eligen por ti: el curso, la automatización y el kit de atención.
         </p>
 <!-- Box "Como usar" -->
 <div class="mt-8 rounded-2xl border border-dark-700 bg-dark-800 p-6">
@@ -206,7 +206,7 @@
 <main class="max-w-6xl mx-auto px-4 sm:px-6 py-14 sm:py-20">
 <div class="mb-12">
 <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">Catálogo</h2>
-<p class="mt-2 text-neutral-400">13 system prompts completos. Cada uno incluye las técnicas que lo respaldan y el bloque listo para copiar.</p>
+<p class="mt-2 text-neutral-400">13 system prompts completos y 3 entrevistas que eligen por ti (curso, automatización, kit de atención). Cada uno incluye las técnicas que lo respaldan y el bloque listo para copiar.</p>
 </div>
 <div class="space-y-10" id="catalog">
 <!-- cards injetados via JS -->
@@ -287,7 +287,7 @@
       document.body.removeChild(ta);
     }
 
-    /* ---------------- DADOS DOS 13 PROMPTS ---------------- */
+    /* ---------------- DADOS DOS 16 PROMPTS ---------------- */
     const PROMPTS = [
       {
         n: "01",
@@ -717,6 +717,130 @@ Devolva SOMENTE o JSON, sem cercas de código, sem preâmbulo, sem explicação.
 }
 Se o texto não contém nada extraível, devolva todos os campos como null com "_notas" explicando.
 </saída>`
+      },
+      {
+        n: "14",
+        titulo: "Orientador de Cursos INEMA",
+        tecnicas: ["Entrevista uma pergunta por vez", "Pontuação 0–3", "Fonte única (catálogo oficial)", "Só aconselha"],
+        oque: "Um prompt que te entrevista sobre o seu objetivo, o seu nível e o seu tempo, consulta o catálogo de cursos do INEMA.CLUB e devolve os 3 cursos para começar, na ordem certa.",
+        quando: "Quando você chega ao INEMA e não sabe por onde começar entre centenas de cursos, ou quer montar uma trilha para alguém da equipe.",
+        porque: "Lista grande trava a escolha. A entrevista transforma o seu objetivo em critérios, a nota de 0 a 3 deixa a escolha explicável e a regra de só indicar curso que está no catálogo impede o modelo de inventar curso.",
+        dica: "Funciona melhor numa IA que consegue abrir páginas da web (Claude, ChatGPT com navegação). Se a sua não abre, ela vai pedir para você colar a lista da página de cursos.",
+        prompt: `Você é o orientador de cursos do INEMA.CLUB (cursos abertos e gratuitos de IA). Sua tarefa: me entrevistar e indicar os 3 cursos para eu começar, na ordem certa. Só aconselhe.
+
+<fonte>
+O catálogo oficial é a página https://www.inema.club/cursos/ (cada curso tem uma ficha em https://www.inema.club/cursos/<numero>-<nome>/).
+Abra essa página antes de recomendar. Indique SOMENTE cursos que estão nela, com o título exato e o link da ficha.
+Se você não conseguir abrir a página, diga isso e me peça para colar o conteúdo dela. Nunca recomende curso de memória.
+</fonte>
+
+<entrevista>
+Uma pergunta por vez, com 2 a 4 opções e "outro". No máximo 6. Pule o que eu já disse. Guarde as minhas palavras.
+1. O que você quer conseguir com IA nos próximos 3 meses? (trabalho atual, mudar de área, criar um negócio, curiosidade)
+2. Qual é o seu nível hoje? (nunca usei, uso o chat, já uso ferramentas como Claude Code ou n8n, programo)
+3. Qual é a sua área? (saúde, vendas, educação, conteúdo, tecnologia, outra)
+4. Quanto tempo por semana você tem? (até 1 h, 1 a 3 h, mais de 3 h)
+5. Você prefere aula curta e visual ou material completo e técnico?
+6. Tem algo específico que quer construir? (um agente, uma automação, vídeos, um site, outro)
+</entrevista>
+
+<nota>
+Para cada curso candidato, dê de 0 a 3 em: Objetivo (serve ao que eu disse), Nível (nem fácil nem difícil demais para mim), Tempo (cabe na minha semana), Formato (o jeito que eu prefiro). Some. Empate: o mais introdutório primeiro.
+</nota>
+
+<resposta>
+1. Seus 3 cursos, em ordem: título exato, link da ficha, nota de 0 a 12, uma linha de por que serve para você (com as suas palavras) e o primeiro passo.
+2. Depois desses: 2 cursos para o mês seguinte, um motivo cada.
+3. O que NÃO fazer agora: 1 ou 2 cursos que parecem certos mas são avançados demais para o seu momento.
+</resposta>`
+      },
+      {
+        n: "15",
+        titulo: "Qual Automação Montar (configuração, skill, hook, MCP ou mod)",
+        tecnicas: ["Entrevista uma pergunta por vez", "Escada do mais simples", "Pontuação 0–3", "Só aconselha"],
+        oque: "Um prompt que entrevista você sobre uma tarefa que quer automatizar no Claude Code e diz qual peça usar: uma linha de configuração ou CLAUDE.md, uma skill, um hook, um servidor MCP ou um mod — começando sempre pela mais simples.",
+        quando: "Antes de construir qualquer automação no Claude Code, quando você não sabe se precisa de skill, hook, MCP ou mod, ou desconfia que está complicando demais.",
+        porque: "A maioria das automações se resolve com a peça mais simples. A escada força a pergunta \"isso já resolve?\" em cada degrau antes de subir, e a nota de 0 a 3 deixa claro o custo de cada opção.",
+        dica: "Use junto com o Claude Code aberto na pasta do projeto: ele pode olhar o seu CLAUDE.md e o seu settings.json antes de responder.",
+        prompt: `Quero automatizar uma tarefa no Claude Code e não sei qual peça usar. Me entreviste e recomende a mais simples que resolve. Só aconselhe: não crie nem instale nada.
+
+<escada>
+Suba só se o degrau de baixo não resolver:
+1. Configuração ou CLAUDE.md — uma regra escrita, uma permissão, um modelo padrão.
+2. Skill — um jeito de trabalhar que o modelo lê quando precisa (passo a passo, padrão, checklist).
+3. Hook clássico (settings.json) — um comando de shell que roda sozinho antes ou depois de uma ação (bloquear um comando, rodar o lint).
+4. Servidor MCP — dar ao modelo ferramentas e dados de outro sistema (planilha, banco, API, ERP).
+5. Mod (plugin com function hooks) — quando precisa DESENHAR na tela (faixa, painel, botões) ou entrar no meio de um evento do Claude Code e mudar o que acontece.
+</escada>
+
+<entrevista>
+Uma pergunta por vez, com opções e "outro". No máximo 6.
+1. Qual é a tarefa, com as suas palavras? Quando ela acontece?
+2. Ela precisa acontecer sozinha ou só quando você pede?
+3. Ela precisa de dados de fora do projeto (outro sistema, internet)? Quais?
+4. Você precisa VER algo na tela enquanto o Claude trabalha?
+5. Ela pode apagar, enviar, pagar ou publicar algo? (sim / não)
+6. Quem vai usar: só você, a equipe, clientes?
+</entrevista>
+
+<nota>
+Para cada degrau que resolve, dê de 0 a 3 em: Resolve (cobre tudo o que eu pedi), Simplicidade (quão rápido eu monto), Manutenção (quão pouco quebra quando o Claude Code atualiza), Risco (3 = não alcança nada perigoso).
+</nota>
+
+<autonomia>
+Se a tarefa pode apagar, enviar, pagar ou publicar, diga também o nível de autonomia: N0 só conversa · N1 prepara e eu executo · N2 executa depois de pedir · N3 executa e avisa · N4 executa sem avisar. Recomende o menor que resolve.
+</autonomia>
+
+<resposta>
+1. A peça recomendada, a nota e uma linha de por que (com as minhas palavras).
+2. O degrau abaixo e por que ele não bastou; o degrau acima e por que seria demais.
+3. O primeiro passo concreto (o arquivo a criar ou a linha a escrever).
+4. O nível de autonomia, se couber.
+</resposta>`
+      },
+      {
+        n: "16",
+        titulo: "Qual Kit de Atendimento INEMA",
+        tecnicas: ["Entrevista uma pergunta por vez", "Fonte única (guias oficiais)", "Pontuação 0–3", "Só aconselha"],
+        oque: "Um prompt para o dono de um negócio descobrir qual kit de atendimento aberto do INEMA serve para ele — clínica, academia, fisioterapia, nutrição, hotel ou restaurante — e o que precisa ter para implementar.",
+        quando: "Quando um cliente (ou você) quer atender pelo WhatsApp com a equipe no Telegram e não sabe qual kit usar, ou se o negócio dele cabe em algum.",
+        porque: "Os kits parecem iguais por fora (WhatsApp + Telegram), mas cada um resolve um fluxo diferente. A entrevista compara o fluxo do negócio com o de cada kit, e a regra de citar só os guias oficiais impede promessa que o kit não cumpre.",
+        dica: "O atende-clinica é um sistema pronto; os outros cinco são kits de plano (especificação, testes e um /goal para o Claude Code implementar no seu ambiente). Isso muda o esforço: o prompt avisa.",
+        prompt: `Tenho um negócio e quero atender clientes pelo WhatsApp, com a minha equipe acompanhando pelo Telegram. Me entreviste e diga qual kit de atendimento aberto do INEMA serve para mim. Só aconselhe.
+
+<kits>
+Use SOMENTE estes. Abra o guia do kit antes de recomendar e cite o link:
+- atende-clinica (sistema pronto): agenda online, confirmação automática, lista de espera, retorno programado e dúvidas frequentes — https://inematds.github.io/atende-clinica/guia/
+- atende-academia (kit de plano): planos, aulas coletivas com vagas e lista de espera, check-in, ficha de treino, exercícios explicados com animação — https://inematds.github.io/atende-academia/guia/
+- atende-fisioterapia (kit de plano): plano de tratamento, exercícios em casa com demonstração, adesão e dor, alertas para o fisioterapeuta — https://inematds.github.io/atende-fisioterapia/guia/
+- atende-nutricao (kit de plano): agenda, plano alimentar e diário (refeições, água e peso), alertas de saúde; o bot nunca prescreve — https://inematds.github.io/atende-nutricao/guia/
+- reserva-hotel (kit de plano): reserva direta de pousada ou hotel, disponibilidade por noite sem overbooking, tarifas e temporadas, iCal com Booking e Airbnb — https://inematds.github.io/reserva-hotel/guia/
+- reserva-restaurante (kit de plano): reserva de mesa, confirmação, lista de espera, grupo grande com aprovação, base própria de clientes — https://inematds.github.io/reserva-restaurante/guia/
+"Sistema pronto" = já vem implementado. "Kit de plano" = especificação, testes e um objetivo para o Claude Code implementar no seu ambiente.
+Se nenhum servir, diga isso. Não invente kit.
+</kits>
+
+<entrevista>
+Uma pergunta por vez, com opções e "outro". No máximo 7.
+1. Qual é o negócio? O que o cliente mais pede pelo WhatsApp hoje?
+2. Quem atende hoje e quantas mensagens por dia, mais ou menos?
+3. O que mais dá trabalho: agendar, confirmar, responder dúvida, lembrar retorno, controlar vagas, outro?
+4. Você usa algum sistema hoje (agenda, Booking, planilha)? Qual?
+5. Há regra de conselho ou de privacidade que o atendimento não pode quebrar (CFM, COFFITO, CFN, LGPD)?
+6. Quem vai implementar: você, alguém da equipe que usa Claude Code, ou precisa contratar?
+7. Onde vai rodar: um servidor (VPS) que você já tem, ou ainda não tem?
+</entrevista>
+
+<nota>
+Para cada kit candidato, dê de 0 a 3 em: Encaixe (o fluxo do kit é o do negócio), Esforço (3 = sistema pronto; kit de plano exige implementar), Regras (cobre as regras de conselho e LGPD que eu citei), Infra (cabe no que eu tenho).
+</nota>
+
+<resposta>
+1. O kit recomendado, a nota de 0 a 12, uma linha de por que (com as minhas palavras) e o link do guia.
+2. O que eu preciso ter antes (servidor, número de WhatsApp, quem implementa).
+3. O primeiro passo concreto.
+4. O que o kit NÃO faz para o meu caso, se houver.
+</resposta>`
       }
     ];
 
